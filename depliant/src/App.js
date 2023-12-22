@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Introduction from "./components/Introduction";
 import MapComponent from "./components/MapComponent";
 import ExplanationPage from "./components/ExplanationPage";
-import GenericPage from "./components/GenericPage";
+import FinalPage from "./components/FinalPage"; // Ajout de l'import
+import "./styles.scss";
 
 const locations = [
   {
@@ -41,9 +42,12 @@ const App = () => {
       return (
         <MapComponent center={location.center} destination={location.center} />
       );
-    } else {
+    } else if (currentPage < locations.length * 2) {
       // Page d'explication
       return <ExplanationPage explanation={location.explanation} />;
+    } else {
+      // Dernière page
+      return <FinalPage />;
     }
   };
 

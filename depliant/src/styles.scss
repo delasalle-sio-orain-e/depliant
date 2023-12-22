@@ -1,33 +1,67 @@
 // styles.scss
 
 // Styles généraux
+
 body {
   font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  box-sizing: border-box;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 600px; // Ajustez la largeur maximale selon vos besoins
   margin: 0 auto;
   padding: 20px;
 }
 
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+// Styles spécifiques pour les téléphones
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: #f5f5f5; // Couleur de fond pour les écrans de téléphone
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  // Ajoutez des styles spécifiques pour les écrans de téléphone au besoin
 }
 
-// Media query pour les téléphones mobiles
-@media only screen and (max-width: 600px) {
-  button {
-    font-size: 14px;
+// Styles pour le bouton
+
+button {
+  padding: 10px;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #2980b9;
   }
 }
 
-// Ajoutez d'autres styles généraux au besoin
+// Styles pour les pages
+
+.page {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+// Ajoutez d'autres styles au besoin

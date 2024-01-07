@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet-polylinedecorator";
 
 import customMarkerIcon from "../icons/custom-marker.png";
 
@@ -25,6 +26,32 @@ const MapComponent = ({ locations }) => {
         iconSize: [32, 32], // Ajustez la taille de l'icône selon vos besoins
         iconAnchor: [16, 32], // Point d'ancrage de l'icône (centre en bas)
       });
+
+      // Obtenez les coordonnées de tous les lieux
+      const coordinates = locations.map((location) => [
+        location.center.lat,
+        location.center.lng,
+      ]);
+
+      // Créez une polyline avec les coordonnées des lieux
+      const polyline = L.polyline(coordinates).addTo(map);
+
+      // Ajoutez des flèches sur la polyline
+      const arrowOptions = {
+        iconSize: [10, 10],
+        polygon: true,
+        weight: 1,
+        color: "#000",
+      };
+      L.polylineDecorator(polyline, {
+        patterns: [
+          {
+            offset: "50%",
+            repeat: 0,
+            symbol: L.Symbol.arrowHead(arrowOptions),
+          },
+        ],
+      }).addTo(map);
 
       // Ajoutez des marqueurs avec l'icône personnalisée pour chaque lieu
       locations.forEach((location) => {

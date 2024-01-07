@@ -6,7 +6,7 @@ import L from "leaflet";
 // Importez votre icône ici (ajustez le chemin selon votre structure de projet)
 import customMarkerIcon from "../icons/custom-marker.png";
 
-const MapComponent = ({ center }) => {
+const MapComponent = ({ center, name }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -17,15 +17,16 @@ const MapComponent = ({ center }) => {
         map,
       );
 
-      // Créez un objet Icon pour l'icône personnalisée
       const customIcon = L.icon({
         iconUrl: customMarkerIcon,
-        iconSize: [32, 32], // Ajustez la taille de l'icône selon vos besoins
-        iconAnchor: [16, 32], // Point d'ancrage de l'icône (centre en bas)
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
       });
 
-      // Ajoutez des marqueurs avec l'icône personnalisée
-      L.marker([center.lat, center.lng], { icon: customIcon }).addTo(map);
+      // Ajoutez des marqueurs avec l'icône personnalisée et la popup
+      const marker = L.marker([center.lat, center.lng], { icon: customIcon })
+        .addTo(map)
+        .bindPopup(name); // Remplacez "Votre texte ici" par le nom du lieu
 
       return () => map.remove();
     }

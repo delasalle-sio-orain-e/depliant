@@ -2,7 +2,11 @@
 import React from "react";
 import MapComponentIntroduction from "./MapComponentIntroduction";
 
-const Introduction = ({ onNext, locations }) => {
+const Introduction = ({ onNext, locations, onLocationClick }) => {
+  const handleLocationClick = (locationId) => {
+    // Vous pouvez effectuer une redirection ici ou effectuer toute autre action nécessaire
+    console.log(`Redirection vers la page d'explication de ${locationId}`);
+  };
   return (
     <div>
       <div className="slider">
@@ -23,8 +27,13 @@ const Introduction = ({ onNext, locations }) => {
             <strong>Liste des lieux :</strong>
           </p>
           <ul>
-            {locations.map((location) => (
-              <li key={location.id}>{location.name}</li>
+            {locations.map((location, index) => (
+              <li key={location.id}>
+                {/* Utilisation d'un lien avec une fonction de gestion d'événements onClick */}
+                <a href="#" onClick={() => onLocationClick(index)}>
+                  {location.name}
+                </a>
+              </li>
             ))}
           </ul>
         </div>

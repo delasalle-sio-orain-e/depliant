@@ -1,5 +1,6 @@
 // styles.scss
 @import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Parisienne&display=swap");
 
 // Styles généraux
 * {
@@ -38,6 +39,7 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
   color: #f5f5f5;
+  font-size: small;
 }
 
 .container {
@@ -46,10 +48,10 @@ body {
   padding: 20px;
 }
 
-h1,
 h2,
 h3 {
-  color: red;
+  color: #4aa3a2;
+  font-family: "Parisienne", cursive;
 }
 
 ul {
@@ -62,12 +64,19 @@ li {
 }
 
 a {
-  color: #333;
+  color: #0099ff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #0099ff;
+  color: white;
+}
+
+.custom-rectangle {
+  background-color: #ccc;
+  margin: 20px 0;
+  border-radius: 10px;
+  text-align: center;
 }
 
 // Styles spécifiques pour les téléphones

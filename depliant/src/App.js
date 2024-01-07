@@ -1,17 +1,18 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Introduction from "./components/Introduction";
 import MapComponent from "./components/MapComponent";
 import ExplanationPage from "./components/ExplanationPage";
 import FinalPage from "./components/FinalPage"; // Ajout de l'import
 import "./styles.scss";
+import FondImage from "./assets/Fond.jpg";
 
 const locations = [
   {
     id: 1,
     name: "Centre d'Art contemporain d'Ivry - le Crédac",
-    center: { lat: 48.81412, lng: 2.39051 },
-    images: "../assets/Fond.jpg",
+    center: { lat: 48.80721, lng: 2.3937 },
+    images: [FondImage, FondImage],
     historicalDates: [
       {
         date: "1959",
@@ -85,7 +86,7 @@ const locations = [
   {
     id: 2,
     name: "Les Frigos, Lieu d'Art et de Création",
-    center: { lat: 48.83642, lng: 2.36758 },
+    center: { lat: 48.83293, lng: 2.37355 },
     historicalDates: [
       {
         date: "1921",
@@ -229,7 +230,7 @@ const locations = [
   {
     id: 4,
     name: "Halle de la Villette, Espace Culturel Polyvalent",
-    center: { lat: 48.89536, lng: 2.39333 },
+    center: { lat: 48.89005, lng: 2.3918 },
     historicalDates: [
       { date: "1867", event: "Construction de la Halle de la Villette." },
       {
@@ -294,79 +295,142 @@ const locations = [
   },
   {
     id: 5,
-    name: "Hangar Y, Parc de Découverte Culturelle",
-    center: { lat: 48.86729, lng: 2.38146 },
+    name: "Le Centquatre (104), Espace Culturel et Artistique",
+    center: { lat: 48.8877, lng: 2.3624 },
     historicalDates: [
+      { date: "2008", event: "Inauguration du Centquatre (104)." },
       {
-        date: "1910",
-        event: "Construction du hangar pour le stockage aérien.",
+        date: "2013",
+        event: "Lancement de l'espace dédié à la création numérique.",
       },
-      { date: "1985", event: "Transformation du hangar en parc culturel." },
       {
-        date: "2000",
-        event: "Inauguration du parc de découverte culturelle Hangar Y.",
+        date: "2017",
+        event:
+          "Collaboration avec des artistes internationaux pour des résidences.",
       },
     ],
     history: `
-    Hangar Y, anciennement utilisé pour le stockage aérien, a été transformé en un
-    parc de découverte culturelle. Ce lieu unique offre des expériences sensorielles,
-    artistiques et culinaires, dans un cadre riche en histoire et en créativité.
+    Le Centquatre (104), inauguré en 2008, est un espace culturel et artistique situé
+    dans le 19ème arrondissement de Paris. Il se veut un lieu ouvert à la création sous
+    toutes ses formes, proposant des expositions, des spectacles et des ateliers.
     `,
     explanation: `
-    Enveloppez-vous de plaisir et de découverte dans le parc de Hangar Y.
-    Cette initiative vise à proposer des ateliers ludiques et
-    pédagogiques, dans un cadre riche en histoire, artistique et culturel.
-    Des expériences sensorielles, artistiques et culinaires attendent vos
-    petits et grands. Pour des informations pratiques et la tarification
-    des visites, consultez notre site web et la section "infos pratiques" de cette page.
+    Plongez dans la créativité au Centquatre (104).
+    Des expositions innovantes, des performances artistiques, des ateliers participatifs,
+    et bien plus encore vous attendent dans ce lieu dynamique.
   `,
     workshops: [
-      "Construction de modèles réduits d'avions et d'aérostats",
-      "Atelier de dessin et de peinture sur le thème de l'aviation",
-      "Atelier de découverte et de réalisation de dessins animés",
-      "Visite guidée des œuvres d'art du parc de Hangar Y",
-      "Dégustation et découverte des spécialités gastronomiques régionales",
+      "Ateliers de création numérique",
+      "Expositions interactives pour enfants",
+      "Rencontres avec des artistes en résidence",
+      "Ateliers de théâtre et de danse",
+      "Concerts de musique du monde",
     ],
     accessInfo: `<strong>Accès et Contacts</strong>
       <br />
-      Quai de Javel 100 Meudon - CARTE Jours et horaires d'ouverture
-      <a href="http://www.hangay.com">hp / hangay.com</a>
+      104 Rue d'Aubervilliers, 75019 Paris - Consultez notre site web pour les horaires
+      <a href="http://www.104paris.com">104paris.com</a>
       <br />
-      <a href="mailto:contact@hangay.com">contact@hangay.com</a>
+      <a href="mailto:info@104paris.com">info@104paris.com</a>
       <br />
       <a href="tel:+3312345678">+33 1 23 45 67 8</a>
       <br />
       <br />
       <strong>Langues Parlées</strong>
       <br />
-      Français, Anglais, Espagnol
+      Français, Anglais
       <br />
       <br />
-      <strong>Carte et Tarifs</strong>
+      <strong>Jours et Horaires d'Ouverture</strong>
       <br />
-      Consultez la section <a href="#tarifs">tarifs</a> de cette page pour
-      le parcours et la participation aux ateliers.
+      Lundi à Dimanche : 10h00 - 20h00
     `,
     mapAndRates: `
     <strong>
-        Parc + Exposition Temporaire + Participation aux Ateliers
+        Billet d'entrée à l'exposition
       </strong>
       <br />
-      Pour un enfant (moins de 12 ans) : 10 €
+      Gratuit pour les moins de 12 ans
       <br />
-      Pour un adulte (12 ans et plus) : 15 €
+      Pour un adulte (12 ans et plus) : 12 €
       <br />
       <br />
-      <strong>Parc + Exposition Temporaire</strong>
+      <strong>Pass Annuel</strong>
       <br />
-      Pour un enfant (moins de 12 ans) : 7 €
+      Pour un enfant (moins de 12 ans) : Gratuit
       <br />
-      Pour un adulte (12 ans et plus) : 10 €
+      Pour un adulte (12 ans et plus) : 25 €
       <br />
     `,
   },
   {
     id: 6,
+    name: "Halle Saint-Pierre, Musée d'Art Brut et d'Art Singulier",
+    center: { lat: 48.88471, lng: 2.34449 },
+    historicalDates: [
+      { date: "1986", event: "Inauguration de la Halle Saint-Pierre." },
+      { date: "1995", event: "Ouverture de l'espace dédié à l'Art Brut." },
+      {
+        date: "2000",
+        event: "Extension du musée avec une nouvelle salle d'exposition.",
+      },
+    ],
+    history: `
+    La Halle Saint-Pierre, inaugurée en 1986, est un musée d'Art Brut et d'Art Singulier.
+    Depuis son ouverture, elle s'est dédiée à la promotion d'artistes en marge des courants
+    artistiques traditionnels, offrant ainsi un espace unique d'exploration artistique.
+    `,
+    explanation: `
+    Explorez l'extraordinaire à la Halle Saint-Pierre.
+    Des collections fascinantes d'Art Brut et d'Art Singulier vous attendent, ainsi
+    que des expositions temporaires mettant en lumière la créativité hors normes.
+  `,
+    workshops: [
+      "Ateliers de création artistique pour enfants",
+      "Rencontres avec des artistes en résidence",
+      "Conférences sur l'histoire de l'Art Brut",
+      "Visites commentées des collections permanentes",
+      "Projection de films documentaires sur l'Art Singulier",
+    ],
+    accessInfo: `<strong>Accès et Contacts</strong>
+      <br />
+      2 Rue Ronsard, 75018 Paris - Consultez notre site web pour les horaires
+      <a href="http://www.hallesaintpierre.org">hallesaintpierre.org</a>
+      <br />
+      <a href="mailto:info@hallesaintpierre.org">info@hallesaintpierre.org</a>
+      <br />
+      <a href="tel:+3312345678">+33 1 23 45 67 8</a>
+      <br />
+      <br />
+      <strong>Langues Parlées</strong>
+      <br />
+      Français, Anglais
+      <br />
+      <br />
+      <strong>Jours et Horaires d'Ouverture</strong>
+      <br />
+      Mardi à Dimanche : 11h00 - 18h00
+    `,
+    mapAndRates: `
+    <strong>
+        Billet d'entrée au musée
+      </strong>
+      <br />
+      Gratuit pour les moins de 12 ans
+      <br />
+      Pour un adulte (12 ans et plus) : 10 €
+      <br />
+      <br />
+      <strong>Pass Annuel</strong>
+      <br />
+      Pour un enfant (moins de 12 ans) : Gratuit
+      <br />
+      Pour un adulte (12 ans et plus) : 25 €
+      <br />
+    `,
+  },
+  {
+    id: 7,
     name: "Tour Eiffel, Symbole emblématique de Paris",
     center: { lat: 48.858844, lng: 2.29435 },
     historicalDates: [
@@ -449,21 +513,66 @@ const App = () => {
     setCurrentPage(currentPage - 1);
   };
 
+  const goToIntroduction = () => {
+    setCurrentPage(0);
+  };
+
+  const saveStateToLocalStorage = () => {
+    localStorage.setItem("currentPage", currentPage);
+  };
+
+  const loadStateFromLocalStorage = () => {
+    const savedPage = localStorage.getItem("currentPage");
+    if (savedPage !== null && currentPage === 0) {
+      setCurrentPage(parseInt(savedPage, 10));
+    }
+  };
+
+  useEffect(() => {
+    loadStateFromLocalStorage();
+  }, []); // Assurez-vous que cet effet ne s'exécute qu'une seule fois, au chargement initial
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      saveStateToLocalStorage();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [currentPage]);
+
+  const handleLocationClick = (locationIndex) => {
+    // Calculer la nouvelle page en fonction de l'index du lieu
+    const newPage = locationIndex * 2 + 2;
+
+    // Mettre à jour la page actuelle
+    setCurrentPage(newPage);
+  };
+
   const renderPage = () => {
+    console.log("Current Page:", currentPage); // Ajoutez cette ligne
     const locationIndex = Math.ceil(currentPage / 2) - 1;
     const location = locations[locationIndex];
 
     if (currentPage === 0) {
-      return <Introduction onNext={nextPage} locations={locations} />;
+      return (
+        <Introduction
+          onNext={nextPage}
+          locations={locations}
+          onLocationClick={handleLocationClick}
+        />
+      );
     }
-
-    if (currentPage % 2 === 1) {
+    if (currentPage % 2 === 1 && currentPage <= locations.length * 2) {
       // Page de carte
-      return <MapComponent center={location.center} />;
-    } else if (currentPage < locations.length * 2) {
+      return <MapComponent center={location.center} name={location.name} />;
+    } else if (currentPage <= locations.length * 2) {
       // Page d'explication
       return <ExplanationPage location={location} />;
-    } else if (currentPage === locations.length * 2) {
+    } else if (currentPage > locations.length * 2) {
       // Dernière page, pas de bouton suivant
       return <FinalPage />;
     }
@@ -473,10 +582,19 @@ const App = () => {
     <div>
       {renderPage()}
       {currentPage > 0 && (
-        <button onClick={previousPage}>Page précédente</button>
+        <>
+          <button onClick={previousPage}>Page précédente</button>
+        </>
       )}
-      {currentPage > 0 && currentPage < locations.length * 2 && (
-        <button onClick={nextPage}>Page suivante</button>
+      {currentPage > 0 && currentPage <= locations.length * 2 && (
+        <>
+          <button onClick={nextPage}>Page suivante</button>
+        </>
+      )}
+      {currentPage > 0 && (
+        <>
+          <button onClick={goToIntroduction}>Revenir à l'Introduction</button>
+        </>
       )}
     </div>
   );

@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "google-maps-react": "^2.0.6",
+    "leaflet-arrowheads": "^1.4.0",
+    "leaflet-polylinedecorator": "^1.6.0",
     "react-quill": "^2.0.0"
   }
 }
